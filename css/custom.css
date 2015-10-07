@@ -1,0 +1,43 @@
+/*
+ * Generell stuff
+ */
+/* line 4, ../sass/_style.scss */
+body {
+  background-color: #ffffff;
+  color: #ffffff;
+  font-family: "nimbus-sans", sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+}
+
+/* line 14, ../sass/_style.scss */
+p, h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+}
+
+/* line 19, ../sass/_style.scss */
+h2 {
+  font-weight: 700;
+  font-size: 80px;
+  color: #000000;
+}
+
+/* line 25, ../sass/_style.scss */
+#page {
+  margin: 30px;
+  text-align: center;
+  /*background-color: $orange;*/
+}
+
+/* line 31, ../sass/_style.scss */
+button {
+  border: none;
+  background: #34a853;
+  padding: 12px 20px;
+  font-size: 20px;
+  cursor: pointer;
+  color: #ffffff;
+}

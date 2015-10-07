@@ -1,0 +1,38 @@
+/*
+ * Generell stuff
+ */
+body {
+  background-color: $white;
+  color: $white;
+  font-family: $font-nimbus;
+  font-weight: $light;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+}
+
+h2 {
+  font-weight: $bold;
+  font-size: 80px;
+  color: #000000;
+}
+
+#page {
+  margin: 30px;
+  text-align: center;
+  /*background-color: $orange;*/
+}
+
+button {
+  border: none;
+  background: $green;
+  padding: 12px 20px;
+  font-size: 20px;
+  cursor: pointer;
+  color: $white;
+}
