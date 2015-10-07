@@ -33,11 +33,11 @@ h2 {
 }
 
 /* line 31, ../sass/_style.scss */
-button {
-  border: none;
+a {
+  display: inline-block;
   background: #34a853;
   padding: 12px 20px;
   font-size: 20px;
-  cursor: pointer;
   color: #ffffff;
+  text-decoration: none;
 }
