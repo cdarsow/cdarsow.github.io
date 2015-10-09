@@ -2,6 +2,11 @@
  * Generell stuff
  */
 /* line 4, ../sass/_style.scss */
+html, body {
+  height: 100%;
+}
+
+/* line 8, ../sass/_style.scss */
 body {
   background-color: #ffffff;
   color: #ffffff;
@@ -12,28 +17,38 @@ body {
   padding: 0;
 }
 
-/* line 14, ../sass/_style.scss */
+/* line 18, ../sass/_style.scss */
 p, h1, h2, h3, h4, h5, h6 {
   margin: 0;
   padding: 0;
 }
 
-/* line 19, ../sass/_style.scss */
-h2 {
+/* line 24, ../sass/_style.scss */
+* {
+  box-sizing: border-box;
+}
+
+/* line 28, ../sass/_style.scss */
+#page {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  height: 100%;
+  background-color: #fbbc05;
+}
+/* line 36, ../sass/_style.scss */
+#page h2 {
   font-weight: 700;
   font-size: 80px;
   color: #000000;
 }
-
-/* line 25, ../sass/_style.scss */
-#page {
-  margin: 30px;
-  text-align: center;
-  /*background-color: $orange;*/
-}
-
-/* line 31, ../sass/_style.scss */
-a {
+/* line 42, ../sass/_style.scss */
+#page a {
   display: inline-block;
   background: #34a853;
   padding: 12px 20px;
@@ -41,3 +56,5 @@ a {
   color: #ffffff;
   text-decoration: none;
 }
+
+/*@import "tests";*/

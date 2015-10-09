@@ -1,6 +1,10 @@
 /*
  * Generell stuff
  */
+html, body {
+  height: 100%;
+}
+
 body {
   background-color: $white;
   color: $white;
@@ -16,23 +20,31 @@ p, h1, h2, h3, h4, h5, h6 {
   padding: 0;
 }
 
-h2 {
-  font-weight: $bold;
-  font-size: 80px;
-  color: #000000;
+
+* {
+  box-sizing: border-box;
 }
 
 #page {
-  margin: 30px;
-  text-align: center;
-  /*background-color: $orange;*/
-}
-
-a {
-  display: inline-block;
-  background: $green;
-  padding: 12px 20px;
-  font-size: 20px;
-  color: $white;
-  text-decoration: none;
+  @include display-flex;
+  @include flex-direction(column);
+  @include justify-content(center);
+  @include align-items(center);
+  height: 100%;
+  background-color: $orange;
+  
+  h2 {
+    font-weight: $bold;
+    font-size: 80px;
+    color: #000000;
+  }
+  
+  a {
+    display: inline-block;
+    background: $green;
+    padding: 12px 20px;
+    font-size: 20px;
+    color: $white;
+    text-decoration: none;
+  }
 }
