@@ -39,15 +39,17 @@ p, h1, h2, h3, h4, h5, h6 {
   -webkit-align-items: center;
   align-items: center;
   height: 100%;
-  background-color: #fbbc05;
+  /*background-color: $orange;*/
 }
 /* line 36, ../sass/_style.scss */
 #page h2 {
   font-weight: 700;
   font-size: 80px;
   color: #000000;
+  position: relative;
+  top: -50px;
 }
-/* line 42, ../sass/_style.scss */
+/* line 44, ../sass/_style.scss */
 #page a {
   display: inline-block;
   background: #34a853;
@@ -55,6 +57,8 @@ p, h1, h2, h3, h4, h5, h6 {
   font-size: 20px;
   color: #ffffff;
   text-decoration: none;
+  position: relative;
+  top: -50px;
 }
 
 /*@import "tests";*/
