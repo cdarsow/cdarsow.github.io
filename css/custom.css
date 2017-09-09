@@ -9,8 +9,8 @@ html, body {
 /* line 8, ../sass/_style.scss */
 body {
   background-color: #ffffff;
-  color: #ffffff;
-  font-family: "nimbus-sans", sans-serif;
+  color: #171738;
+  font-family: "Roboto", sans-serif;
   font-weight: 300;
   font-size: 16px;
   margin: 0;
@@ -43,19 +43,19 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 /* line 36, ../sass/_style.scss */
 #page h2 {
-  font-weight: 700;
+  font-weight: 500;
   font-size: 80px;
-  color: #000000;
   position: relative;
   top: -50px;
 }
-/* line 44, ../sass/_style.scss */
+/* line 43, ../sass/_style.scss */
 #page a {
   display: inline-block;
-  background: #34a853;
+  /*background: $green;*/
+  border: solid 2px #f75c03;
   padding: 12px 20px;
   font-size: 20px;
-  color: #ffffff;
+  color: #171738;
   text-decoration: none;
   position: relative;
   top: -50px;
