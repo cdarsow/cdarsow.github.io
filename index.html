@@ -1,83 +1,119 @@
 <!DOCTYPE html>
 <html lang="de-DE">
-<head>
-  <link rel="dns-prefetch" href="//www.google-analytics.com">
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Christian Darsow - UX Developer</title>
-  <meta name="description" content="Hallo, ich bin Christian, Informatiker aus Hamburg. Seit mehr als 15 Jahren helfe ich Kunden bei der Realisierung digitaler Projekte."/>
-  <link rel="canonical" href="http://darsow.io/"/>
-  <meta name="author" content="Christian Darsow" />
-  <meta name="Copyright" content="Copyright Christian Darsow 2018. All Rights Reserved." />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <style>
-      html, body {
-          height: 100%;
+  <head>
+    <link rel="dns-prefetch" href="//www.google-analytics.com" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Christian Darsow</title>
+    <meta
+      name="description"
+      content="Hallo, ich bin Christian, Dipl. Informatiker aus Hamburg."
+    />
+    <link rel="canonical" href="http://darsow.io/" />
+    <meta name="author" content="Christian Darsow" />
+    <meta
+      name="Copyright"
+      content="Copyright Christian Darsow 2023. All Rights Reserved."
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <style>
+      html,
+      body {
+        height: 100%;
       }
       body {
-          background-color: #ffffff;
-          color: #171738;
-          font-family: "Arial", sans-serif;
-          font-weight: 300;
-          font-size: 16px;
-          margin: 0;
-          padding: 0;
+        background-color: #000000;
+        color: #ffffff;
+        font-family: "Arial", sans-serif;
+        font-weight: 300;
+        font-size: 16px;
+        margin: 0;
+        padding: 0;
       }
-      p, h1, h2, h3, h4, h5, h6 {
-          margin: 0;
-          padding: 0;
+      p,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        margin: 0;
+        padding: 0;
       }
       * {
-          box-sizing: border-box;
+        box-sizing: border-box;
       }
       #page {
-          display: -webkit-flex;
-          display: flex;
-          -webkit-flex-direction: column;
-          flex-direction: column;
-          -webkit-justify-content: center;
-          justify-content: center;
-          -webkit-align-items: center;
-          align-items: center;
-          height: 100%;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-direction: column;
+        flex-direction: column;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-align-items: center;
+        align-items: center;
+        height: 100%;
       }
       #page h2 {
-          font-weight: 700;
-          font-size: 80px;
-          position: relative;
-          top: -50px;
+        font-weight: 700;
+        font-size: 80px;
+        position: relative;
+        top: -50px;
       }
       #page a {
-          display: inline-block;
-          border: solid 2px #f75c03;
-          padding: 12px 20px;
-          font-size: 20px;
-          color: #171738;
-          text-decoration: none;
-          position: relative;
-          top: -50px;
+        display: inline-block;
+        border: solid 2px #ffffff;
+        padding: 12px 20px;
+        font-size: 20px;
+        color: #ffffff;
+        text-decoration: none;
+        position: relative;
+        top: -50px;
       }
-  </style>
-    <link rel="icon" type="image/png" href="img/favicon-32x32.png" sizes="32x32" />
-    <link rel="icon" type="image/png" href="img/favicon-16x16.png" sizes="16x16" />
-</head>
-<body>
+    </style>
+    <link
+      rel="icon"
+      type="image/png"
+      href="img/favicon-32x32.png"
+      sizes="32x32"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="img/favicon-16x16.png"
+      sizes="16x16"
+    />
+  </head>
+  <body>
+    <div id="page">
+      <h2>Say</h2>
+      <a href="mailto:hello@darsow.io">hello@darsow.io</a>
+    </div>
 
-<div id="page">
-  <h2>Say</h2>
-  <a href="mailto:hello@darsow.io">hello@darsow.io</a>
-</div>
+    <script>
+      (function (i, s, o, g, r, a, m) {
+        i["GoogleAnalyticsObject"] = r;
+        (i[r] =
+          i[r] ||
+          function () {
+            (i[r].q = i[r].q || []).push(arguments);
+          }),
+          (i[r].l = 1 * new Date());
+        (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m);
+      })(
+        window,
+        document,
+        "script",
+        "//www.google-analytics.com/analytics.js",
+        "ga"
+      );
 
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-68650701-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
-</body>
+      ga("create", "UA-68650701-1", "auto");
+      ga("send", "pageview");
+    </script>
+  </body>
 </html>
