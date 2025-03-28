@@ -10,6 +10,7 @@
 <script setup lang="ts">
 import { useTemplateRef, onMounted } from "vue";
 import rainbow from "@/images/rainbow.png";
+import coolFont from "@/fonts/Knewave-Regular.ttf";
 
 const canvas = useTemplateRef<HTMLCanvasElement>("canvas");
 
@@ -81,6 +82,32 @@ onMounted(() => {
   const context: CanvasRenderingContext2D | null =
     canvas.value.getContext("2d");
 
+  const title = "MagicMonster";
+  function addText() {
+    if (!context || !canvas.value) {
+      return;
+    }
+    context.font = "48px myCoolFont";
+    context.lineWidth = 5;
+
+    context.strokeStyle = "#00ff00";
+
+    context.textAlign = "center"; // center text
+
+    context.strokeText(title, canvas.value.width / 2, 100);
+
+    context.fillStyle = "#ff00ff";
+    context.fillText(title, canvas.value.width / 2, 100);
+  }
+
+  const f = new FontFace("myCoolFont", `url(${coolFont})`);
+
+  f.load().then((font) => {
+    document.fonts.add(font);
+    console.log("font loaded");
+    addText();
+  });
+
   theatorFit();
   window.onresize = theatorFit;
 
@@ -117,7 +144,7 @@ onMounted(() => {
       return;
     }
     if (imageLoaded) {
-      context.drawImage(rainbowImage, 0, 0);
+      context.drawImage(rainbowImage, 0, 200);
     }
   }
 
@@ -127,11 +154,11 @@ onMounted(() => {
     }
 
     // erase entire canvas
-    context.clearRect(0, 0, canvas.value.width, canvas.value.height);
+    // context.clearRect(0, 0, canvas.value.width, canvas.value.height);
 
     // render each type of entity in order, relative to layers
     renderBackground();
-    square();
+    // square();
     // renderProps();
     // renderCharacters();
     // renderControls();
