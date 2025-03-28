@@ -9,6 +9,7 @@
 </template>
 <script setup lang="ts">
 import { useTemplateRef, onMounted } from "vue";
+import ImageLoader from "./ImageLoader";
 import rainbow from "@/images/rainbow.png";
 import monster from "@/images/monster.png";
 import coolFont from "@/fonts/Knewave-Regular.ttf";
@@ -59,13 +60,47 @@ onMounted(() => {
     context.fillText(title, canvas.value.width / 2, 100);
   }
 
+  function addPoints() {
+    if (!context || !canvas.value) {
+      return;
+    }
+
+    context.font = "24px myCoolFont";
+    context.textAlign = "center"; // center text
+    context.fillStyle = "#000000";
+    context.fillText("Punkte: 12", canvas.value.width / 2, 200);
+  }
+
   const f = new FontFace("myCoolFont", `url(${coolFont})`);
 
   f.load().then((font) => {
     document.fonts.add(font);
     console.log("font loaded");
     addText();
+    addPoints();
   });
+
+  function renderBackground() {
+    if (!context) {
+      return;
+    }
+
+    context.drawImage(imageLoader.getImage(rainbow), 0, 200);
+  }
+
+  const imagesReady = () => {
+    console.log("game ready to start");
+    startFrames();
+  };
+  const imageLoader = new ImageLoader();
+  imageLoader.addImage(rainbow, () => {
+    renderBackground();
+  });
+  imageLoader.addImage(monster, () => {
+    console.log("monster 1");
+  });
+
+  imageLoader.loadImages(imagesReady);
 
   theatorFit();
   window.onresize = theatorFit;
@@ -75,19 +110,14 @@ onMounted(() => {
   };
   canvas.value.addEventListener("mousedown", someInfo);
 
-  let y = 0;
+  // let y = 0;
   let x = 50;
   let stepCounter = 0;
   const realSpeed = 5;
   let speed = realSpeed;
-  let imageLoaded1 = false;
-  let imageLoaded2 = false;
 
   function drawMonster() {
     if (!context) {
-      return;
-    }
-    if (!imageLoaded2) {
       return;
     }
 
@@ -102,28 +132,7 @@ onMounted(() => {
     }
 
     x += speed;
-    context.drawImage(monsterImage, x, 500);
-  }
-
-  const rainbowImage = new Image();
-  rainbowImage.src = rainbow;
-  rainbowImage.addEventListener("load", () => {
-    imageLoaded1 = true;
-  });
-
-  const monsterImage = new Image();
-  monsterImage.src = monster;
-  monsterImage.addEventListener("load", () => {
-    imageLoaded2 = true;
-  });
-
-  function renderBackground() {
-    if (!context) {
-      return;
-    }
-    if (imageLoaded1) {
-      context.drawImage(rainbowImage, 0, 200);
-    }
+    context.drawImage(imageLoader.getImage(monster), x, 500);
   }
 
   function startFrames() {
@@ -138,6 +147,7 @@ onMounted(() => {
     renderBackground();
     drawMonster();
     addText();
+    addPoints();
     // square();
     // renderProps();
     // renderCharacters();
@@ -147,7 +157,7 @@ onMounted(() => {
     window.requestAnimationFrame(startFrames);
   }
 
-  startFrames();
+  // startFrames();
 });
 </script>
 <style src="./styles/game.css"></style>
