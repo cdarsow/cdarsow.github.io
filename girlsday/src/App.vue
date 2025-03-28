@@ -13,6 +13,7 @@ import ImageLoader from "./ImageLoader";
 import rainbow from "@/images/rainbow.png";
 import monster from "@/images/monster.png";
 import coolFont from "@/fonts/Knewave-Regular.ttf";
+import SpriteFactory from "./SpriteFactory";
 
 const canvas = useTemplateRef<HTMLCanvasElement>("canvas");
 
@@ -40,6 +41,10 @@ onMounted(() => {
   }
   const context: CanvasRenderingContext2D | null =
     canvas.value.getContext("2d");
+
+  if (!context) {
+    return;
+  }
 
   const title = "MagicMonster";
   function addText() {
@@ -88,11 +93,18 @@ onMounted(() => {
     context.drawImage(imageLoader.getImage(rainbow), 0, 200);
   }
 
+  const imageLoader = new ImageLoader();
+  const spriteFactory = new SpriteFactory([monster], imageLoader, context);
+
   const imagesReady = () => {
-    console.log("game ready to start");
+    if (!context) {
+      return;
+    }
+
+    spriteFactory.start();
     startFrames();
   };
-  const imageLoader = new ImageLoader();
+
   imageLoader.addImage(rainbow, () => {
     renderBackground();
   });
@@ -148,16 +160,10 @@ onMounted(() => {
     drawMonster();
     addText();
     addPoints();
-    // square();
-    // renderProps();
-    // renderCharacters();
-    // renderControls();
+    spriteFactory.render();
 
-    // rerun function (call next frame)
     window.requestAnimationFrame(startFrames);
   }
-
-  // startFrames();
 });
 </script>
 <style src="./styles/game.css"></style>
