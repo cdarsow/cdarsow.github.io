@@ -87,7 +87,7 @@ onMounted(() => {
 
     backgroundManager.render();
     if (!gameStarted) {
-      // characterManager.renderIntro();
+      characterManager.renderIntro();
       textManager.renderGameName();
       interactionManager.addStartBtn(startGame);
     } else {

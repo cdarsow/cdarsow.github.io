@@ -6,7 +6,7 @@ export default class TextManager {
   private context: CanvasRenderingContext2D | null;
   private fontLoaded = false;
   private fontName = "gameFont";
-  private gameName = "MagicMonsterrrr";
+  private gameName = "MagicMonster";
   private colorManager: ColorManager;
 
   constructor(canvas: HTMLCanvasElement, colorManager: ColorManager) {
@@ -30,7 +30,7 @@ export default class TextManager {
       return;
     }
 
-    this.context.font = "40px " + this.fontName;
+    this.context.font = "44px " + this.fontName;
     this.context.textAlign = "center";
 
     this.context.lineWidth = 5;
