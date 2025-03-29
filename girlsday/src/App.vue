@@ -15,6 +15,7 @@ import SpriteFactory from "./SpriteFactory";
 import TextManager from "./TextManager";
 import BackgroundManager from "./BackgroundManager";
 import CharacterManager from "./CharacterManager";
+import ColorManager from "./ColorManager";
 import InteractionManager from "./InteractionManager";
 import background from "@/images/rainbow.png";
 import character from "@/images/monster.png";
@@ -29,7 +30,9 @@ let textManager: TextManager;
 let backgroundManager: BackgroundManager;
 let characterManager: CharacterManager;
 let interactionManager: InteractionManager;
+let colorManager: ColorManager;
 let points = 0;
+let gameStarted = false;
 
 onMounted(() => {
   if (!canvas.value) {
@@ -43,15 +46,25 @@ onMounted(() => {
 
   imageLoader = new ImageLoader();
   canvasManager = new CanvasManager(canvas.value, canvasDims);
-  textManager = new TextManager(canvas.value);
+  colorManager = new ColorManager();
+  textManager = new TextManager(canvas.value, colorManager);
   characterManager = new CharacterManager(canvas.value, imageLoader, character);
   spriteFactory = new SpriteFactory([character], imageLoader, canvas.value);
-  interactionManager = new InteractionManager(canvasManager);
+  interactionManager = new InteractionManager(
+    canvas.value,
+    colorManager,
+    textManager
+  );
   backgroundManager = new BackgroundManager(
     canvas.value,
     imageLoader,
     background
   );
+
+  const theatorFit = () => {
+    canvasManager.theatorFit();
+  };
+  window.onresize = theatorFit;
 
   imageLoader.addImage(background, () => {
     backgroundManager.render();
@@ -59,24 +72,35 @@ onMounted(() => {
   imageLoader.addImage(character, () => {
     characterManager.renderIntro();
   });
-  imageLoader.loadImages(() => {
-    spriteFactory.start();
-    startFrames();
-  });
 
-  function startFrames() {
+  const startGame = () => {
+    spriteFactory.start();
+    gameStarted = true;
+  };
+
+  const renderGame = () => {
     if (!canvas.value || !context) {
       return;
     }
 
     context.clearRect(0, 0, canvas.value.width, canvas.value.height);
-    backgroundManager.render();
-    characterManager.renderIntro();
-    spriteFactory.render();
-    textManager.renderPoints(points);
 
-    // window.requestAnimationFrame(startFrames);
-  }
+    backgroundManager.render();
+    if (!gameStarted) {
+      // characterManager.renderIntro();
+      textManager.renderGameName();
+      interactionManager.addStartBtn(startGame);
+    } else {
+      spriteFactory.render();
+      textManager.renderPoints(points);
+    }
+    window.requestAnimationFrame(renderGame);
+  };
+
+  imageLoader.loadImages(() => {
+    renderGame();
+    interactionManager.addStartBtn(startGame);
+  });
 });
 </script>
 <style src="./styles/game.css"></style>
