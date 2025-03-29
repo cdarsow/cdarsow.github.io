@@ -3,6 +3,7 @@ import Sprite from "./Sprite";
 
 export default class SpriteFactory {
   private types: string[] = [];
+  private values: number[] = [];
   private imageLoader: ImageLoader;
   private canvas: HTMLCanvasElement;
   private context: CanvasRenderingContext2D | null;
@@ -10,10 +11,12 @@ export default class SpriteFactory {
 
   constructor(
     types: string[],
+    values: number[],
     imageLoader: ImageLoader,
     canvas: HTMLCanvasElement
   ) {
     this.types = types;
+    this.values = values;
     this.imageLoader = imageLoader;
     this.canvas = canvas;
     this.context = canvas.getContext("2d");
@@ -31,16 +34,16 @@ export default class SpriteFactory {
         return;
       }
 
+      const random = getRandomInt(0, this.types.length - 1);
       const sprite = new Sprite(
-        this.types[getRandomInt(0, this.types.length - 1)],
+        this.types[random],
         this.imageLoader,
         this.context,
         (getRandomInt(0, 2) * this.canvas.width) / 3 + 50,
         0,
-        30
+        this.values[random]
       );
       this.sprites.push(sprite);
-      console.log(this.sprites.length);
     };
     setInterval(createSprite, 1250);
   }

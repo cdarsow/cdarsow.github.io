@@ -51,12 +51,14 @@ export default class CharacterManager {
     );
   }
 
-  gotoStartPosition() {
+  gotoColumn(column: number) {
     if (!this.context) {
       return;
     }
 
-    this.x = this.canvas.width / 2 - this.characterWidth / 2;
+    this.x =
+      (this.canvas.width / 3) * column +
+      (this.canvas.width / 3 - this.characterWidth) / 2;
     this.y = this.canvas.height - this.characterHeight - this.paddingY;
     this.context.drawImage(
       this.imageLoader.getImage(this.character),

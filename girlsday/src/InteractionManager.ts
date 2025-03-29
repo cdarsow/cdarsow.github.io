@@ -92,4 +92,34 @@ export default class InteractionManager {
     }
     return true;
   }
+
+  addGameHandler(callback: (column: number) => void) {
+    const eventHandler = (event: MouseEvent) => {
+      callback(this.gameHandler(event));
+    };
+
+    this.canvas.addEventListener("mousedown", eventHandler);
+  }
+
+  gameHandler(event: MouseEvent): number {
+    const windowWidth = window.innerWidth;
+    const canvasWidth = parseInt(this.canvas.style.width);
+    const columnWidth = this.canvas.width / 3;
+    const sizer = this.canvas.width / canvasWidth;
+
+    let x = 0;
+    if (windowWidth > canvasWidth) {
+      x = (event.x - (windowWidth - canvasWidth) / 2) * sizer;
+    } else {
+      x = event.x * sizer;
+    }
+
+    if (x < columnWidth) {
+      return 0;
+    }
+    if (x > columnWidth * 2) {
+      return 2;
+    }
+    return 1;
+  }
 }
