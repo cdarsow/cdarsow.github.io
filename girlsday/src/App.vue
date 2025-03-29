@@ -19,6 +19,8 @@ import ColorManager from "./ColorManager";
 import InteractionManager from "./InteractionManager";
 import background from "@/images/bg.jpg";
 import character from "@/images/monster.png";
+import pineapple from "@/images/pineapple.png";
+import strawberry from "@/images/strawberry.png";
 
 const canvas = useTemplateRef<HTMLCanvasElement>("canvas");
 const canvasDims = { width: 750, height: 1300 };
@@ -49,7 +51,11 @@ onMounted(() => {
   colorManager = new ColorManager();
   textManager = new TextManager(canvas.value, colorManager);
   characterManager = new CharacterManager(canvas.value, imageLoader, character);
-  spriteFactory = new SpriteFactory([character], imageLoader, canvas.value);
+  spriteFactory = new SpriteFactory(
+    [pineapple, strawberry],
+    imageLoader,
+    canvas.value
+  );
   interactionManager = new InteractionManager(
     canvas.value,
     colorManager,
@@ -72,6 +78,8 @@ onMounted(() => {
   imageLoader.addImage(character, () => {
     characterManager.renderIntro();
   });
+  imageLoader.addImage(pineapple);
+  imageLoader.addImage(strawberry);
 
   const startGame = () => {
     spriteFactory.start();
@@ -92,6 +100,7 @@ onMounted(() => {
       interactionManager.addStartBtn(startGame);
       textManager.renderPoints(points);
     } else {
+      characterManager.gotoStartPosition();
       spriteFactory.render();
       textManager.renderPoints(points);
     }

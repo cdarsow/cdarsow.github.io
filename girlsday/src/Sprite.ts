@@ -5,7 +5,7 @@ export default class Sprite {
   private imageLoader: ImageLoader;
   private x = 0;
   private y = 0;
-  private speed = 3;
+  private speed = 5;
   private context: CanvasRenderingContext2D;
   private value = 0;
 
@@ -25,12 +25,13 @@ export default class Sprite {
     this.value = value;
   }
 
-  render() {
+  render(): number {
     this.y += this.speed;
     this.context.drawImage(
       this.imageLoader.getImage(this.image),
       this.x,
       this.y
     );
+    return this.y;
   }
 }

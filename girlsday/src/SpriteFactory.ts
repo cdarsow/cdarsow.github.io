@@ -20,27 +20,37 @@ export default class SpriteFactory {
   }
 
   start() {
+    const getRandomInt = (min: number, max: number) => {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    };
+
     const createSprite = () => {
       if (!this.context) {
         return;
       }
 
       const sprite = new Sprite(
-        this.types[0],
+        this.types[getRandomInt(0, this.types.length - 1)],
         this.imageLoader,
         this.context,
-        Math.random() * 300,
+        (getRandomInt(0, 2) * this.canvas.width) / 3 + 50,
         0,
         30
       );
       this.sprites.push(sprite);
+      console.log(this.sprites.length);
     };
-    setInterval(createSprite, 2000);
+    setInterval(createSprite, 1250);
   }
 
   render() {
     this.sprites.forEach((sprite) => {
-      sprite.render();
+      const newY = sprite.render();
+      if (newY > this.canvas.height) {
+        this.sprites.splice(0, 1);
+      }
     });
   }
 }

@@ -50,4 +50,18 @@ export default class CharacterManager {
       this.y
     );
   }
+
+  gotoStartPosition() {
+    if (!this.context) {
+      return;
+    }
+
+    this.x = this.canvas.width / 2 - this.characterWidth / 2;
+    this.y = this.canvas.height - this.characterHeight - this.paddingY;
+    this.context.drawImage(
+      this.imageLoader.getImage(this.character),
+      this.x,
+      this.y
+    );
+  }
 }
