@@ -70,17 +70,19 @@ export default class InteractionManager {
   }
 
   startBtnClicked(event: MouseEvent): boolean {
-    const x = (event.x * parseInt(this.canvas.style.width)) / window.innerWidth;
-    const y =
-      (event.y * parseInt(this.canvas.style.height)) / window.innerHeight;
+    const windowWidth = window.innerWidth;
+    const canvasWidth = parseInt(this.canvas.style.width);
+    const sizer = this.canvas.width / canvasWidth;
 
-    console.log("click");
-    console.log(this.canvas.style.marginLeft);
-    console.log(y);
-    // console.log(this.btnXStart);
-    // console.log(this.btnXEnd);
-    // console.log(this.btnYStart);
-    // console.log(this.btnYEnd);
+    let x = 0;
+    let y = 0;
+    if (windowWidth > canvasWidth) {
+      x = (event.x - (windowWidth - canvasWidth) / 2) * sizer;
+      y = event.y * sizer;
+    } else {
+      x = event.x * sizer;
+      y = event.y * sizer;
+    }
 
     if (!(this.btnXStart < x && x < this.btnXEnd)) {
       return false;
