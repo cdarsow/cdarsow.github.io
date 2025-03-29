@@ -22,6 +22,6 @@ export default class BackgroundManager {
       return;
     }
 
-    this.context.drawImage(this.imageLoader.getImage(this.background), 0, 200);
+    this.context.drawImage(this.imageLoader.getImage(this.background), 0, 0);
   }
 }

@@ -5,11 +5,14 @@ export default class CharacterManager {
   private context: CanvasRenderingContext2D | null;
   private imageLoader: ImageLoader;
   private character: string = "";
-  private x = 50;
-  private y = 500;
-  private introStepCounter = 0;
-  private introSpeed = 5;
-  private speed = this.introSpeed;
+  private paddingX = 80;
+  private paddingY = 180;
+  private x = this.paddingX;
+  private y = 0;
+  private introSpeed = 8;
+  private characterWidth = 200;
+  private characterHeight = 174;
+  private nextDirectionChange = 0;
 
   constructor(
     canvas: HTMLCanvasElement,
@@ -27,17 +30,19 @@ export default class CharacterManager {
       return;
     }
 
-    this.introStepCounter++;
-    if (this.introStepCounter > 200 / this.introSpeed) {
-      if (this.speed > 0) {
-        this.speed = -1 * this.introSpeed;
-      } else {
-        this.speed = this.introSpeed;
-      }
-      this.introStepCounter = 0;
+    this.x += this.introSpeed;
+
+    if (this.introSpeed > 0 && this.x > this.nextDirectionChange) {
+      this.introSpeed = -1 * this.introSpeed;
+      this.nextDirectionChange = this.paddingX;
+    }
+    if (this.introSpeed < 0 && this.x < this.nextDirectionChange) {
+      this.introSpeed = -1 * this.introSpeed;
+      this.nextDirectionChange =
+        this.canvas.width - this.paddingX - this.characterWidth;
     }
 
-    this.x += this.speed;
+    this.y = this.canvas.height - this.characterHeight - this.paddingY;
 
     this.context.drawImage(
       this.imageLoader.getImage(this.character),

@@ -30,15 +30,15 @@ export default class TextManager {
       return;
     }
 
-    this.context.font = "44px " + this.fontName;
+    this.context.font = "88px " + this.fontName;
     this.context.textAlign = "center";
 
     this.context.lineWidth = 5;
     this.context.strokeStyle = this.colorManager.strokeColor;
-    this.context.strokeText(this.gameName, this.canvas.width / 2, 100);
+    this.context.strokeText(this.gameName, this.canvas.width / 2, 250);
 
     this.context.fillStyle = this.colorManager.fillColor;
-    this.context.fillText(this.gameName, this.canvas.width / 2, 100);
+    this.context.fillText(this.gameName, this.canvas.width / 2, 250);
   }
 
   renderPoints(points: number = 0) {
@@ -46,10 +46,10 @@ export default class TextManager {
       return;
     }
 
-    this.context.font = "24px " + this.fontName;
+    this.context.font = "48px " + this.fontName;
     this.context.textAlign = "center";
     this.context.fillStyle = this.colorManager.pointColor;
-    this.context.fillText("Punkte: " + points, this.canvas.width / 2, 200);
+    this.context.fillText("Punkte: " + points, this.canvas.width / 2, 100);
   }
 
   getFont() {

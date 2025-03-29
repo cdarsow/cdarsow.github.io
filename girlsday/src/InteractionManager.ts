@@ -4,10 +4,15 @@ export default class InteractionManager {
   private canvas: HTMLCanvasElement;
   private context: CanvasRenderingContext2D | null;
   private startEventAdded = false;
-  private startW = 125;
-  private startH = 50;
+  private startBtnWidth = 250;
+  private startBtnHeight = 100;
   private colorManager: ColorManager;
   private textManager: TextManager;
+  private startText = "Start";
+  private btnXStart = 0;
+  private btnXEnd = 0;
+  private btnYStart = 0;
+  private btnYEnd = 0;
 
   constructor(
     canvas: HTMLCanvasElement,
@@ -18,6 +23,11 @@ export default class InteractionManager {
     this.context = canvas.getContext("2d");
     this.colorManager = colorManager;
     this.textManager = textManager;
+
+    this.btnXStart = this.canvas.width / 2 - this.startBtnWidth / 2;
+    this.btnXEnd = this.canvas.width / 2 + this.startBtnWidth / 2;
+    this.btnYStart = this.canvas.height / 2 - this.startBtnHeight / 2;
+    this.btnYEnd = this.canvas.height / 2 + this.startBtnHeight / 2;
   }
 
   addStartBtn(callback: () => void) {
@@ -26,10 +36,10 @@ export default class InteractionManager {
     }
 
     this.context.rect(
-      this.canvas.width / 2 - this.startW / 2,
-      this.canvas.height / 2 - this.startH / 2,
-      this.startW,
-      this.startH
+      this.btnXStart,
+      this.btnYStart,
+      this.startBtnWidth,
+      this.startBtnHeight
     );
     this.context.lineWidth = 5;
     this.context.strokeStyle = this.colorManager.strokeColor;
@@ -37,13 +47,13 @@ export default class InteractionManager {
     this.context.fillStyle = this.colorManager.fillColor;
     this.context.fill();
 
-    this.context.font = "24px " + this.textManager.getFont();
+    this.context.font = "48px " + this.textManager.getFont();
     this.context.textAlign = "center";
     this.context.fillStyle = this.colorManager.strokeColor;
     this.context.fillText(
-      "Start",
+      this.startText,
       this.canvas.width / 2,
-      this.canvas.height / 2 + this.startH / 6
+      this.canvas.height / 2 + this.startBtnHeight / 6
     );
 
     const eventHandler = (event: MouseEvent) => {
@@ -60,17 +70,22 @@ export default class InteractionManager {
   }
 
   startBtnClicked(event: MouseEvent): boolean {
-    const x = event.clientX;
-    const y = event.clientY;
-    const btnXStart = this.canvas.width / 2 - this.startW / 2;
-    const btnXEnd = this.canvas.width / 2 + this.startW / 2;
-    const btnYStart = this.canvas.height / 2 - this.startH / 2;
-    const btnYEnd = this.canvas.height / 2 + this.startH / 2;
+    const x = (event.x * parseInt(this.canvas.style.width)) / window.innerWidth;
+    const y =
+      (event.y * parseInt(this.canvas.style.height)) / window.innerHeight;
 
-    if (!(btnXStart < x && x < btnXEnd)) {
+    console.log("click");
+    console.log(this.canvas.style.marginLeft);
+    console.log(y);
+    // console.log(this.btnXStart);
+    // console.log(this.btnXEnd);
+    // console.log(this.btnYStart);
+    // console.log(this.btnYEnd);
+
+    if (!(this.btnXStart < x && x < this.btnXEnd)) {
       return false;
     }
-    if (!(btnYStart < y && y < btnYEnd)) {
+    if (!(this.btnYStart < y && y < this.btnYEnd)) {
       return false;
     }
     return true;

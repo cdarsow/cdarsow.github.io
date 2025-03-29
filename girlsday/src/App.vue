@@ -17,11 +17,11 @@ import BackgroundManager from "./BackgroundManager";
 import CharacterManager from "./CharacterManager";
 import ColorManager from "./ColorManager";
 import InteractionManager from "./InteractionManager";
-import background from "@/images/rainbow.png";
+import background from "@/images/bg.jpg";
 import character from "@/images/monster.png";
 
 const canvas = useTemplateRef<HTMLCanvasElement>("canvas");
-const canvasDims = { width: 375, height: 650 };
+const canvasDims = { width: 750, height: 1300 };
 
 let imageLoader: ImageLoader;
 let canvasManager: CanvasManager;
@@ -90,6 +90,7 @@ onMounted(() => {
       characterManager.renderIntro();
       textManager.renderGameName();
       interactionManager.addStartBtn(startGame);
+      textManager.renderPoints(points);
     } else {
       spriteFactory.render();
       textManager.renderPoints(points);
