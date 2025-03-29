@@ -4,21 +4,27 @@ import Sprite from "./Sprite";
 export default class SpriteFactory {
   private types: string[] = [];
   private imageLoader: ImageLoader;
-  private context: CanvasRenderingContext2D;
+  private canvas: HTMLCanvasElement;
+  private context: CanvasRenderingContext2D | null;
   private sprites: Sprite[] = [];
 
   constructor(
     types: string[],
     imageLoader: ImageLoader,
-    context: CanvasRenderingContext2D
+    canvas: HTMLCanvasElement
   ) {
     this.types = types;
     this.imageLoader = imageLoader;
-    this.context = context;
+    this.canvas = canvas;
+    this.context = canvas.getContext("2d");
   }
 
   start() {
     const createSprite = () => {
+      if (!this.context) {
+        return;
+      }
+
       const sprite = new Sprite(
         this.types[0],
         this.imageLoader,
