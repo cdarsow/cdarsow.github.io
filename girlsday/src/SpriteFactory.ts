@@ -8,6 +8,7 @@ export default class SpriteFactory {
   private canvas: HTMLCanvasElement;
   private context: CanvasRenderingContext2D | null;
   private sprites: Sprite[] = [];
+  private speed = 5;
 
   constructor(
     types: string[],
@@ -29,11 +30,16 @@ export default class SpriteFactory {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     };
 
+    let counter = 0;
     const createSprite = () => {
       if (!this.context) {
         return;
       }
 
+      counter++;
+      if (counter % 5 === 0) {
+        this.speed += 2;
+      }
       const random = getRandomInt(0, this.types.length - 1);
       const sprite = new Sprite(
         this.types[random],
@@ -41,7 +47,8 @@ export default class SpriteFactory {
         this.context,
         (getRandomInt(0, 2) * this.canvas.width) / 3 + 50,
         0,
-        this.values[random]
+        this.values[random],
+        this.speed
       );
       this.sprites.push(sprite);
     };

@@ -103,7 +103,6 @@ onMounted(() => {
       characterManager.renderIntro();
       textManager.renderGameName();
       interactionManager.addStartBtn(startGame);
-      textManager.renderPoints(points);
     } else {
       characterManager.gotoColumn(currentColumn);
       spriteFactory.render();
