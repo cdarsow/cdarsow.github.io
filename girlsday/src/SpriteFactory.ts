@@ -75,9 +75,19 @@ export default class SpriteFactory {
     sprite: { x: number; y: number; w: number; h: number; value: number },
     character: { x: number; y: number; w: number; h: number }
   ) {
-    if (sprite.y + sprite.h > character.y) {
-      this.sprites.splice(0, 1);
-      this.scoreCallback(sprite.value);
+    if (!(sprite.y + sprite.h > character.y)) {
+      return;
     }
+    if (
+      !(
+        sprite.x + sprite.w > character.x &&
+        sprite.x < character.x + character.w
+      )
+    ) {
+      return;
+    }
+
+    this.sprites.splice(0, 1);
+    this.scoreCallback(sprite.value);
   }
 }
