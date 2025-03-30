@@ -1,3 +1,4 @@
+import type CharacterManager from "./CharacterManager";
 import ImageLoader from "./ImageLoader";
 import Sprite from "./Sprite";
 
@@ -9,18 +10,24 @@ export default class SpriteFactory {
   private context: CanvasRenderingContext2D | null;
   private sprites: Sprite[] = [];
   private speed = 5;
+  private characterManager: CharacterManager;
+  private scoreCallback: (points: number) => void;
 
   constructor(
     types: string[],
     values: number[],
     imageLoader: ImageLoader,
-    canvas: HTMLCanvasElement
+    canvas: HTMLCanvasElement,
+    characterManager: CharacterManager,
+    scoreCallback: (points: number) => void
   ) {
     this.types = types;
     this.values = values;
     this.imageLoader = imageLoader;
     this.canvas = canvas;
     this.context = canvas.getContext("2d");
+    this.characterManager = characterManager;
+    this.scoreCallback = scoreCallback;
   }
 
   start() {
@@ -30,16 +37,11 @@ export default class SpriteFactory {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     };
 
-    let counter = 0;
     const createSprite = () => {
       if (!this.context) {
         return;
       }
 
-      counter++;
-      if (counter % 5 === 0) {
-        this.speed += 2;
-      }
       const random = getRandomInt(0, this.types.length - 1);
       const sprite = new Sprite(
         this.types[random],
@@ -57,10 +59,25 @@ export default class SpriteFactory {
 
   render() {
     this.sprites.forEach((sprite) => {
-      const newY = sprite.render();
-      if (newY > this.canvas.height) {
-        this.sprites.splice(0, 1);
-      }
+      const info = sprite.render();
+      this.checkOutOfView(info);
+      this.checkCollision(info, this.characterManager.getInfo());
     });
+  }
+
+  private checkOutOfView(info: { x: number; y: number; w: number; h: number }) {
+    if (info.y > this.canvas.height) {
+      this.sprites.splice(0, 1);
+    }
+  }
+
+  private checkCollision(
+    sprite: { x: number; y: number; w: number; h: number; value: number },
+    character: { x: number; y: number; w: number; h: number }
+  ) {
+    if (sprite.y + sprite.h > character.y) {
+      this.sprites.splice(0, 1);
+      this.scoreCallback(sprite.value);
+    }
   }
 }

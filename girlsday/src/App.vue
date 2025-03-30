@@ -33,7 +33,7 @@ let backgroundManager: BackgroundManager;
 let characterManager: CharacterManager;
 let interactionManager: InteractionManager;
 let colorManager: ColorManager;
-let points = 0;
+let score = 0;
 let currentColumn = 1;
 let gameStarted = false;
 
@@ -47,6 +47,9 @@ onMounted(() => {
     return;
   }
 
+  const scoreUpdate = (points: number) => {
+    score = score + points;
+  };
   imageLoader = new ImageLoader();
   canvasManager = new CanvasManager(canvas.value, canvasDims);
   colorManager = new ColorManager();
@@ -56,7 +59,9 @@ onMounted(() => {
     [pineapple, strawberry],
     [30, 60],
     imageLoader,
-    canvas.value
+    canvas.value,
+    characterManager,
+    scoreUpdate
   );
   interactionManager = new InteractionManager(
     canvas.value,
@@ -106,7 +111,7 @@ onMounted(() => {
     } else {
       characterManager.gotoColumn(currentColumn);
       spriteFactory.render();
-      textManager.renderPoints(points);
+      textManager.renderPoints(score);
     }
     window.requestAnimationFrame(renderGame);
   };

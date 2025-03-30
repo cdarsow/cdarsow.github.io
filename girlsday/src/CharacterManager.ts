@@ -10,8 +10,8 @@ export default class CharacterManager {
   private x = this.paddingX;
   private y = 0;
   private introSpeed = 8;
-  private characterWidth = 200;
-  private characterHeight = 174;
+  private width = 200;
+  private height = 174;
   private nextDirectionChange = 0;
 
   constructor(
@@ -38,11 +38,10 @@ export default class CharacterManager {
     }
     if (this.introSpeed < 0 && this.x < this.nextDirectionChange) {
       this.introSpeed = -1 * this.introSpeed;
-      this.nextDirectionChange =
-        this.canvas.width - this.paddingX - this.characterWidth;
+      this.nextDirectionChange = this.canvas.width - this.paddingX - this.width;
     }
 
-    this.y = this.canvas.height - this.characterHeight - this.paddingY;
+    this.y = this.canvas.height - this.height - this.paddingY;
 
     this.context.drawImage(
       this.imageLoader.getImage(this.character),
@@ -58,12 +57,21 @@ export default class CharacterManager {
 
     this.x =
       (this.canvas.width / 3) * column +
-      (this.canvas.width / 3 - this.characterWidth) / 2;
-    this.y = this.canvas.height - this.characterHeight - this.paddingY;
+      (this.canvas.width / 3 - this.width) / 2;
+    this.y = this.canvas.height - this.height - this.paddingY;
     this.context.drawImage(
       this.imageLoader.getImage(this.character),
       this.x,
       this.y
     );
+  }
+
+  getInfo() {
+    return {
+      x: this.x,
+      y: this.y,
+      w: this.width,
+      h: this.height,
+    };
   }
 }

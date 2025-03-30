@@ -8,6 +8,8 @@ export default class Sprite {
   private speed = 0;
   private context: CanvasRenderingContext2D;
   private value = 0;
+  private width = 200;
+  private height = 200;
 
   constructor(
     image: string,
@@ -27,13 +29,19 @@ export default class Sprite {
     this.speed = speed;
   }
 
-  render(): number {
+  render() {
     this.y += this.speed;
     this.context.drawImage(
       this.imageLoader.getImage(this.image),
       this.x,
       this.y
     );
-    return this.y;
+    return {
+      x: this.x,
+      y: this.y,
+      w: this.width,
+      h: this.height,
+      value: this.value,
+    };
   }
 }
