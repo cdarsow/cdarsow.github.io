@@ -21,6 +21,7 @@ import background from "@/images/bg.jpg";
 import character from "@/images/monster.png";
 import pineapple from "@/images/pineapple.png";
 import strawberry from "@/images/strawberry.png";
+import lemon from "@/images/lemon.png";
 
 const canvas = useTemplateRef<HTMLCanvasElement>("canvas");
 const canvasDims = { width: 750, height: 1300 };
@@ -36,6 +37,8 @@ let colorManager: ColorManager;
 let score = 0;
 let currentColumn = 1;
 let gameStarted = false;
+const secondsToPlay = 60;
+let secondsLeft = secondsToPlay;
 
 onMounted(() => {
   if (!canvas.value) {
@@ -56,8 +59,8 @@ onMounted(() => {
   textManager = new TextManager(canvas.value, colorManager);
   characterManager = new CharacterManager(canvas.value, imageLoader, character);
   spriteFactory = new SpriteFactory(
-    [pineapple, strawberry],
-    [30, 60],
+    [pineapple, strawberry, lemon],
+    [10, 5, -20],
     imageLoader,
     canvas.value,
     characterManager,
@@ -87,14 +90,32 @@ onMounted(() => {
   });
   imageLoader.addImage(pineapple);
   imageLoader.addImage(strawberry);
+  imageLoader.addImage(lemon);
 
   const startGame = () => {
+    gameStarted = true;
     spriteFactory.start();
-    interactionManager.addGameHandler((column: number) => {
+    score = 0;
+    secondsLeft = secondsToPlay;
+    interactionManager.addGameListener((column: number) => {
       currentColumn = column;
     });
-    gameStarted = true;
+
+    const timerInterval = setInterval(() => {
+      secondsLeft = secondsLeft - 1;
+      if (secondsLeft === 0) {
+        clearInterval(timerInterval);
+        prepareGame();
+      }
+    }, 1000);
   };
+
+  const prepareGame = () => {
+    gameStarted = false;
+    interactionManager.addStartBtnListener(startGame);
+    spriteFactory.stop();
+  };
+  prepareGame();
 
   const renderGame = () => {
     if (!canvas.value || !context) {
@@ -104,21 +125,23 @@ onMounted(() => {
     context.clearRect(0, 0, canvas.value.width, canvas.value.height);
 
     backgroundManager.render();
+    textManager.renderScore(score);
+    textManager.renderTimer(secondsLeft);
+
     if (!gameStarted) {
       characterManager.renderIntro();
       textManager.renderGameName();
-      interactionManager.addStartBtn(startGame);
+      textManager.renderInfo();
+      interactionManager.renderStartBtn();
     } else {
       characterManager.gotoColumn(currentColumn);
       spriteFactory.render();
-      textManager.renderPoints(score);
     }
     window.requestAnimationFrame(renderGame);
   };
 
   imageLoader.loadImages(() => {
     renderGame();
-    interactionManager.addStartBtn(startGame);
   });
 });
 </script>

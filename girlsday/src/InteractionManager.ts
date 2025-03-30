@@ -3,16 +3,15 @@ import TextManager from "./TextManager";
 export default class InteractionManager {
   private canvas: HTMLCanvasElement;
   private context: CanvasRenderingContext2D | null;
-  private startEventAdded = false;
-  private startBtnWidth = 250;
-  private startBtnHeight = 100;
   private colorManager: ColorManager;
   private textManager: TextManager;
-  private startText = "Start";
+  private startBtnWidth = 250;
+  private startBtnHeight = 100;
   private btnXStart = 0;
   private btnXEnd = 0;
   private btnYStart = 0;
   private btnYEnd = 0;
+  private startText = "Start";
 
   constructor(
     canvas: HTMLCanvasElement,
@@ -30,7 +29,7 @@ export default class InteractionManager {
     this.btnYEnd = this.canvas.height / 2 + this.startBtnHeight / 2;
   }
 
-  addStartBtn(callback: () => void) {
+  renderStartBtn() {
     if (!this.context || !this.textManager.getFontLoaded()) {
       return;
     }
@@ -55,7 +54,9 @@ export default class InteractionManager {
       this.canvas.width / 2,
       this.canvas.height / 2 + this.startBtnHeight / 6
     );
+  }
 
+  addStartBtnListener(callback: () => void) {
     const eventHandler = (event: MouseEvent) => {
       if (this.startBtnClicked(event)) {
         this.canvas.removeEventListener("mousedown", eventHandler);
@@ -63,13 +64,18 @@ export default class InteractionManager {
       }
     };
 
-    if (!this.startEventAdded) {
-      this.startEventAdded = true;
-      this.canvas.addEventListener("mousedown", eventHandler);
-    }
+    this.canvas.addEventListener("mousedown", eventHandler);
   }
 
-  startBtnClicked(event: MouseEvent): boolean {
+  addGameListener(callback: (column: number) => void) {
+    const eventHandler = (event: MouseEvent) => {
+      callback(this.determineClickedColumn(event));
+    };
+
+    this.canvas.addEventListener("mousedown", eventHandler);
+  }
+
+  private startBtnClicked(event: MouseEvent): boolean {
     const windowWidth = window.innerWidth;
     const canvasWidth = parseInt(this.canvas.style.width);
     const sizer = this.canvas.width / canvasWidth;
@@ -93,15 +99,7 @@ export default class InteractionManager {
     return true;
   }
 
-  addGameHandler(callback: (column: number) => void) {
-    const eventHandler = (event: MouseEvent) => {
-      callback(this.gameHandler(event));
-    };
-
-    this.canvas.addEventListener("mousedown", eventHandler);
-  }
-
-  gameHandler(event: MouseEvent): number {
+  private determineClickedColumn(event: MouseEvent): number {
     const windowWidth = window.innerWidth;
     const canvasWidth = parseInt(this.canvas.style.width);
     const columnWidth = this.canvas.width / 3;

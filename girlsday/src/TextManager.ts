@@ -6,7 +6,7 @@ export default class TextManager {
   private context: CanvasRenderingContext2D | null;
   private fontLoaded = false;
   private fontName = "gameFont";
-  private gameName = "MagicMonster";
+  private gameName = "MagicMunnnster";
   private colorManager: ColorManager;
 
   constructor(canvas: HTMLCanvasElement, colorManager: ColorManager) {
@@ -41,15 +41,37 @@ export default class TextManager {
     this.context.fillText(this.gameName, this.canvas.width / 2, 250);
   }
 
-  renderPoints(points: number = 0) {
+  renderScore(score: number = 0) {
     if (!this.context || !this.fontLoaded) {
       return;
     }
 
     this.context.font = "48px " + this.fontName;
+    this.context.textAlign = "left";
+    this.context.fillStyle = this.colorManager.standardColor;
+    this.context.fillText("Score: " + score, 50, 100);
+  }
+
+  renderTimer(secondsLeft: number) {
+    if (!this.context || !this.fontLoaded) {
+      return;
+    }
+
+    this.context.font = "48px " + this.fontName;
+    this.context.textAlign = "right";
+    this.context.fillStyle = this.colorManager.standardColor;
+    this.context.fillText("Time: " + secondsLeft, this.canvas.width - 50, 100);
+  }
+
+  renderInfo() {
+    if (!this.context || !this.fontLoaded) {
+      return;
+    }
+
+    this.context.font = "24px " + this.fontName;
     this.context.textAlign = "center";
-    this.context.fillStyle = this.colorManager.pointColor;
-    this.context.fillText("Punkte: " + points, this.canvas.width / 2, 100);
+    this.context.fillStyle = this.colorManager.standardColor;
+    this.context.fillText("by Charlotte & Lykka", this.canvas.width / 2, 300);
   }
 
   getFont() {

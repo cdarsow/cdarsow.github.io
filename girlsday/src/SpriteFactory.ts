@@ -9,9 +9,10 @@ export default class SpriteFactory {
   private canvas: HTMLCanvasElement;
   private context: CanvasRenderingContext2D | null;
   private sprites: Sprite[] = [];
-  private speed = 5;
+  private speed = 10;
   private characterManager: CharacterManager;
   private scoreCallback: (points: number) => void;
+  private factoryInterval = 0;
 
   constructor(
     types: string[],
@@ -54,7 +55,12 @@ export default class SpriteFactory {
       );
       this.sprites.push(sprite);
     };
-    setInterval(createSprite, 1250);
+    this.factoryInterval = setInterval(createSprite, 1250);
+  }
+
+  stop() {
+    clearInterval(this.factoryInterval);
+    this.sprites = [];
   }
 
   render() {
