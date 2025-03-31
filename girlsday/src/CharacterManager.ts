@@ -11,8 +11,8 @@ export default class CharacterManager {
   private y = 0;
   // Geschwindigkeit einstellen für Intro-Animation
   private introSpeed = 0;
-  private width = 150;
-  private height = 200;
+  private width = 180;
+  private height = 247;
   private nextDirectionChange = 0;
 
   constructor(
