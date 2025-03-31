@@ -131,16 +131,16 @@ onMounted(() => {
 
     backgroundManager.render();
     if (!gameStarted) {
-      characterManager.renderIntro();
-      textManager.renderGameName();
-      textManager.renderInfo();
-      interactionManager.renderStartBtn();
+      // characterManager.renderIntro();
+      // textManager.renderGameName();
+      // textManager.renderInfo();
+      // interactionManager.renderStartBtn();
     } else {
       characterManager.gotoColumn(currentColumn);
       spriteFactory.render();
     }
-    textManager.renderScore(score);
-    textManager.renderTimer(secondsLeft);
+    // textManager.renderScore(score);
+    // textManager.renderTimer(secondsLeft);
     window.requestAnimationFrame(renderGame);
   };
 
