@@ -11,7 +11,8 @@ export default class InteractionManager {
   private btnXEnd = 0;
   private btnYStart = 0;
   private btnYEnd = 0;
-  private startText = "Start";
+  // Text zum Starten des Spiels
+  private startText = "Los";
 
   constructor(
     canvas: HTMLCanvasElement,

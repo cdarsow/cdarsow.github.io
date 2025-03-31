@@ -6,12 +6,13 @@ export default class CharacterManager {
   private imageLoader: ImageLoader;
   private character: string = "";
   private paddingX = 80;
-  private paddingY = 180;
+  private paddingY = 100;
   private x = this.paddingX;
   private y = 0;
-  private introSpeed = 8;
-  private width = 200;
-  private height = 174;
+  // Geschwindigkeit einstellen für Intro-Animation
+  private introSpeed = 0;
+  private width = 150;
+  private height = 200;
   private nextDirectionChange = 0;
 
   constructor(
@@ -23,6 +24,7 @@ export default class CharacterManager {
     this.imageLoader = imageLoader;
     this.character = character;
     this.context = canvas.getContext("2d");
+    this.x = this.canvas.width / 2 - this.width / 2;
   }
 
   renderIntro() {
@@ -30,7 +32,7 @@ export default class CharacterManager {
       return;
     }
 
-    this.x += this.introSpeed;
+    this.x = this.x + this.introSpeed;
 
     if (this.introSpeed > 0 && this.x > this.nextDirectionChange) {
       this.introSpeed = -1 * this.introSpeed;

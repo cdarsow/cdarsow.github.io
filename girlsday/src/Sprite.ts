@@ -5,11 +5,12 @@ export default class Sprite {
   private imageLoader: ImageLoader;
   private x = 0;
   private y = 0;
-  private speed = 0;
+  // Geschwindigkeit einstellen für runterfallende Objekte
+  private speed = 1;
   private context: CanvasRenderingContext2D;
   private value = 0;
-  private width = 200;
-  private height = 200;
+  private width = 150;
+  private height = 150;
 
   constructor(
     image: string,
@@ -17,8 +18,7 @@ export default class Sprite {
     context: CanvasRenderingContext2D,
     initialX: number,
     initialY: number,
-    value: number,
-    speed: number
+    value: number
   ) {
     this.image = image;
     this.imageLoader = imageLoader;
@@ -26,7 +26,6 @@ export default class Sprite {
     this.x = initialX;
     this.y = initialY;
     this.value = value;
-    this.speed = speed;
   }
 
   render() {

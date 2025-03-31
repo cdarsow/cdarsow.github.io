@@ -18,10 +18,10 @@ import CharacterManager from "./CharacterManager";
 import ColorManager from "./ColorManager";
 import InteractionManager from "./InteractionManager";
 import background from "@/images/bg.jpg";
-import character from "@/images/monster.png";
-import pineapple from "@/images/pineapple.png";
-import strawberry from "@/images/strawberry.png";
-import lemon from "@/images/lemon.png";
+import character from "@/images/character.png";
+import gegenstand1 from "@/images/sprite1.png";
+import gegenstand2 from "@/images/sprite2.png";
+import gegenstand3 from "@/images/sprite3.png";
 
 const canvas = useTemplateRef<HTMLCanvasElement>("canvas");
 const canvasDims = { width: 750, height: 1300 };
@@ -37,8 +37,13 @@ let colorManager: ColorManager;
 let score = 0;
 let currentColumn = 1;
 let gameStarted = false;
-const secondsToPlay = 60;
+// Einstellen der Spieldauer in Sekunden
+const secondsToPlay = 5;
 let secondsLeft = secondsToPlay;
+// Gegenstaende, die runterfallen
+const gegenstaende = [gegenstand1, gegenstand2, gegenstand3];
+// Werte der Gegenstaende, die runterfallen
+const gegenstandWerte = [5, 10, -20];
 
 onMounted(() => {
   if (!canvas.value) {
@@ -59,8 +64,8 @@ onMounted(() => {
   textManager = new TextManager(canvas.value, colorManager);
   characterManager = new CharacterManager(canvas.value, imageLoader, character);
   spriteFactory = new SpriteFactory(
-    [pineapple, strawberry, lemon],
-    [10, 5, -20],
+    gegenstaende,
+    gegenstandWerte,
     imageLoader,
     canvas.value,
     characterManager,
@@ -88,9 +93,9 @@ onMounted(() => {
   imageLoader.addImage(character, () => {
     characterManager.renderIntro();
   });
-  imageLoader.addImage(pineapple);
-  imageLoader.addImage(strawberry);
-  imageLoader.addImage(lemon);
+  gegenstaende.forEach((gegenstand) => {
+    imageLoader.addImage(gegenstand);
+  });
 
   const startGame = () => {
     gameStarted = true;
@@ -125,9 +130,6 @@ onMounted(() => {
     context.clearRect(0, 0, canvas.value.width, canvas.value.height);
 
     backgroundManager.render();
-    textManager.renderScore(score);
-    textManager.renderTimer(secondsLeft);
-
     if (!gameStarted) {
       characterManager.renderIntro();
       textManager.renderGameName();
@@ -137,6 +139,8 @@ onMounted(() => {
       characterManager.gotoColumn(currentColumn);
       spriteFactory.render();
     }
+    textManager.renderScore(score);
+    textManager.renderTimer(secondsLeft);
     window.requestAnimationFrame(renderGame);
   };
 

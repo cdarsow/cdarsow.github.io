@@ -9,7 +9,6 @@ export default class SpriteFactory {
   private canvas: HTMLCanvasElement;
   private context: CanvasRenderingContext2D | null;
   private sprites: Sprite[] = [];
-  private speed = 10;
   private characterManager: CharacterManager;
   private scoreCallback: (points: number) => void;
   private factoryInterval = 0;
@@ -50,8 +49,7 @@ export default class SpriteFactory {
         this.context,
         (getRandomInt(0, 2) * this.canvas.width) / 3 + 50,
         0,
-        this.values[random],
-        this.speed
+        this.values[random]
       );
       this.sprites.push(sprite);
     };

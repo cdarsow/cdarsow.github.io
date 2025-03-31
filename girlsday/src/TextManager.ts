@@ -1,13 +1,22 @@
-import gameFont from "@/fonts/Knewave-Regular.ttf";
+// Schrift die wir benutzen wollen
+import gameFont from "@/fonts/Hanalei-Regular.ttf";
 import ColorManager from "./ColorManager";
 
 export default class TextManager {
   private canvas: HTMLCanvasElement;
   private context: CanvasRenderingContext2D | null;
-  private fontLoaded = false;
-  private fontName = "gameFont";
-  private gameName = "MagicMunnnster";
   private colorManager: ColorManager;
+  private fontLoaded = false;
+  // Auswahl der Schrift, z.B. gameFont oder sans-serif
+  private fontName = "sans-serif";
+  // hier kann man den Namen vom Spiel anpassen
+  private gameName = "Ein Spiel";
+  // hier kann man eine Information eingeben
+  private info = "vom GirlsDay";
+  // Score Info
+  private score = "Score: ";
+  // Zeit Info
+  private time = "Time: ";
 
   constructor(canvas: HTMLCanvasElement, colorManager: ColorManager) {
     this.canvas = canvas;
@@ -17,7 +26,7 @@ export default class TextManager {
   }
 
   private loadFont() {
-    const font = new FontFace(this.fontName, `url(${gameFont})`);
+    const font = new FontFace("gameFont", `url(${gameFont})`);
     font.load().then((font) => {
       document.fonts.add(font);
       this.fontLoaded = true;
@@ -49,7 +58,7 @@ export default class TextManager {
     this.context.font = "48px " + this.fontName;
     this.context.textAlign = "left";
     this.context.fillStyle = this.colorManager.standardColor;
-    this.context.fillText("Score: " + score, 50, 100);
+    this.context.fillText(this.score + score, 50, 100);
   }
 
   renderTimer(secondsLeft: number) {
@@ -60,7 +69,7 @@ export default class TextManager {
     this.context.font = "48px " + this.fontName;
     this.context.textAlign = "right";
     this.context.fillStyle = this.colorManager.standardColor;
-    this.context.fillText("Time: " + secondsLeft, this.canvas.width - 50, 100);
+    this.context.fillText(this.time + secondsLeft, this.canvas.width - 50, 100);
   }
 
   renderInfo() {
@@ -71,7 +80,7 @@ export default class TextManager {
     this.context.font = "24px " + this.fontName;
     this.context.textAlign = "center";
     this.context.fillStyle = this.colorManager.standardColor;
-    this.context.fillText("by Charlotte & Lykka", this.canvas.width / 2, 300);
+    this.context.fillText(this.info, this.canvas.width / 2, 300);
   }
 
   getFont() {
