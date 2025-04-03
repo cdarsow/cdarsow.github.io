@@ -12,7 +12,7 @@ export default class InteractionManager {
   private btnYStart = 0;
   private btnYEnd = 0;
   // Text zum Starten des Spiels
-  private startText = "Los";
+  private startText = "Let´s go";
 
   constructor(
     canvas: HTMLCanvasElement,
@@ -41,15 +41,15 @@ export default class InteractionManager {
       this.startBtnWidth,
       this.startBtnHeight
     );
-    this.context.lineWidth = 5;
-    this.context.strokeStyle = this.colorManager.strokeColor;
+    this.context.lineWidth = 15;
+    this.context.strokeStyle = "#0ca86a";
     this.context.stroke();
-    this.context.fillStyle = this.colorManager.fillColor;
+    this.context.fillStyle = "#93b84f";
     this.context.fill();
 
     this.context.font = "48px " + this.textManager.getFont();
     this.context.textAlign = "center";
-    this.context.fillStyle = this.colorManager.strokeColor;
+    this.context.fillStyle = "#0ca86a";
     this.context.fillText(
       this.startText,
       this.canvas.width / 2,

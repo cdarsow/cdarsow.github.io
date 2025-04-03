@@ -1,8 +1,8 @@
 export default class ColorManager {
   // Text Umrandung (Spiel Name)
-  public strokeColor = "#ff0000";
+  public strokeColor = "#1ea4c9";
   // Text Füllung (Spiel Name)
-  public fillColor = "#000000";
+  public fillColor = "#27baa2";
   // Text Farbe, Punkte, Zeit, Info
-  public standardColor = "#000000";
+  public standardColor = "#ffffff";
 }

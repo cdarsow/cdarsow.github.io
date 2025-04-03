@@ -17,7 +17,7 @@ import BackgroundManager from "./BackgroundManager";
 import CharacterManager from "./CharacterManager";
 import ColorManager from "./ColorManager";
 import InteractionManager from "./InteractionManager";
-import background from "@/images/bg.jpg";
+import background from "@/images/wasserfallTest.jpg";
 import character from "@/images/character.png";
 import gegenstand1 from "@/images/sprite1.png";
 import gegenstand2 from "@/images/sprite2.png";
@@ -132,15 +132,15 @@ onMounted(() => {
     backgroundManager.render();
     if (!gameStarted) {
       // characterManager.renderIntro();
-      // textManager.renderGameName();
+      textManager.renderGameName();
       // textManager.renderInfo();
-      // interactionManager.renderStartBtn();
+      interactionManager.renderStartBtn();
     } else {
       characterManager.gotoColumn(currentColumn);
       spriteFactory.render();
     }
-    // textManager.renderScore(score);
-    // textManager.renderTimer(secondsLeft);
+    textManager.renderScore(score);
+    textManager.renderTimer(secondsLeft);
     window.requestAnimationFrame(renderGame);
   };
 

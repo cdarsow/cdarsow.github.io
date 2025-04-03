@@ -1,5 +1,5 @@
 // Schrift die wir benutzen wollen
-import gameFont from "@/fonts/Hanalei-Regular.ttf";
+import gameFont from "@/fonts/Mogra-Regular.ttf";
 import ColorManager from "./ColorManager";
 
 export default class TextManager {
@@ -8,9 +8,9 @@ export default class TextManager {
   private colorManager: ColorManager;
   private fontLoaded = false;
   // Auswahl der Schrift, z.B. gameFont oder sans-serif
-  private fontName = "sans-serif";
+  private fontName = "gameFont";
   // hier kann man den Namen vom Spiel anpassen
-  private gameName = "Ein Spiel";
+  private gameName = "JungleMonkey";
   // hier kann man eine Information eingeben
   private info = "vom GirlsDay";
   // Score Info
@@ -42,7 +42,7 @@ export default class TextManager {
     this.context.font = "88px " + this.fontName;
     this.context.textAlign = "center";
 
-    this.context.lineWidth = 5;
+    this.context.lineWidth = 15;
     this.context.strokeStyle = this.colorManager.strokeColor;
     this.context.strokeText(this.gameName, this.canvas.width / 2, 250);
 
@@ -67,9 +67,9 @@ export default class TextManager {
     }
 
     this.context.font = "48px " + this.fontName;
-    this.context.textAlign = "right";
+    this.context.textAlign = "center";
     this.context.fillStyle = this.colorManager.standardColor;
-    this.context.fillText(this.time + secondsLeft, this.canvas.width - 50, 100);
+    this.context.fillText(this.time + secondsLeft, this.canvas.width / 2, 100);
   }
 
   renderInfo() {
