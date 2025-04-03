@@ -6,12 +6,12 @@ export default class CharacterManager {
   private imageLoader: ImageLoader;
   private character: string = "";
   private paddingX = 80;
-  private paddingY = 100;
+  private paddingY = 0;
   private x = this.paddingX;
   private y = 0;
   // Geschwindigkeit einstellen für Intro-Animation
-  private introSpeed = 0;
-  private width = 180;
+  private introSpeed = 5;
+  private width = 184;
   private height = 247;
   private nextDirectionChange = 0;
 

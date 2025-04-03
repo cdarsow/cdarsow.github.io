@@ -12,7 +12,7 @@ export default class TextManager {
   // hier kann man den Namen vom Spiel anpassen
   private gameName = "JungleMonkey";
   // hier kann man eine Information eingeben
-  private info = "vom GirlsDay";
+  private info = "von Charlotte & Lykka";
   // Score Info
   private score = "Score: ";
   // Zeit Info
@@ -44,10 +44,10 @@ export default class TextManager {
 
     this.context.lineWidth = 15;
     this.context.strokeStyle = this.colorManager.strokeColor;
-    this.context.strokeText(this.gameName, this.canvas.width / 2, 250);
+    this.context.strokeText(this.gameName, this.canvas.width / 2, 300);
 
     this.context.fillStyle = this.colorManager.fillColor;
-    this.context.fillText(this.gameName, this.canvas.width / 2, 250);
+    this.context.fillText(this.gameName, this.canvas.width / 2, 300);
   }
 
   renderScore(score: number = 0) {
@@ -80,7 +80,7 @@ export default class TextManager {
     this.context.font = "24px " + this.fontName;
     this.context.textAlign = "center";
     this.context.fillStyle = this.colorManager.standardColor;
-    this.context.fillText(this.info, this.canvas.width / 2, 300);
+    this.context.fillText(this.info, this.canvas.width / 2 + 50, 340);
   }
 
   getFont() {
