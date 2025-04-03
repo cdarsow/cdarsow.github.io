@@ -19,9 +19,12 @@ import ColorManager from "./ColorManager";
 import InteractionManager from "./InteractionManager";
 import background from "@/images/wasserfallTest.jpg";
 import character from "@/images/monkey.png";
-import gegenstand1 from "@/images/sprite1.png";
-import gegenstand2 from "@/images/sprite2.png";
-import gegenstand3 from "@/images/sprite3.png";
+import gegenstand1 from "@/images/banane20.png";
+import gegenstand2 from "@/images/banane10.png";
+import gegenstand3 from "@/images/nuss20.png";
+import gegenstand4 from "@/images/schlangeminus20.png";
+import gegenstand5 from "@/images/totenkopf.png";
+import gegenstand6 from "@/images/banane40.png";
 
 const canvas = useTemplateRef<HTMLCanvasElement>("canvas");
 const canvasDims = { width: 750, height: 1300 };
@@ -38,12 +41,19 @@ let score = 0;
 let currentColumn = 1;
 let gameStarted = false;
 // Einstellen der Spieldauer in Sekunden
-const secondsToPlay = 5;
+const secondsToPlay = 60;
 let secondsLeft = secondsToPlay;
 // Gegenstaende, die runterfallen
-const gegenstaende = [gegenstand1, gegenstand2, gegenstand3];
+const gegenstaende = [
+  gegenstand1,
+  gegenstand2,
+  gegenstand3,
+  gegenstand4,
+  gegenstand5,
+  gegenstand6,
+];
 // Werte der Gegenstaende, die runterfallen
-const gegenstandWerte = [5, 10, -20];
+const gegenstandWerte = [20, 10, 20, -20, -50, 40];
 
 onMounted(() => {
   if (!canvas.value) {

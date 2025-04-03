@@ -6,7 +6,7 @@ export default class Sprite {
   private x = 0;
   private y = 0;
   // Geschwindigkeit einstellen für runterfallende Objekte
-  private speed = 1;
+  private speed = 7;
   private context: CanvasRenderingContext2D;
   private value = 0;
   private width = 150;

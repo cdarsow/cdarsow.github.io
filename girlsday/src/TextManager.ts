@@ -55,7 +55,7 @@ export default class TextManager {
       return;
     }
 
-    this.context.font = "48px " + this.fontName;
+    this.context.font = "40px " + this.fontName;
     this.context.textAlign = "left";
     this.context.fillStyle = this.colorManager.standardColor;
     this.context.fillText(this.score + score, 50, 100);
@@ -66,7 +66,7 @@ export default class TextManager {
       return;
     }
 
-    this.context.font = "48px " + this.fontName;
+    this.context.font = "40px " + this.fontName;
     this.context.textAlign = "center";
     this.context.fillStyle = this.colorManager.standardColor;
     this.context.fillText(this.time + secondsLeft, this.canvas.width / 2, 100);
